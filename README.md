@@ -12,10 +12,14 @@
 -------------
 1. Скопировать папку payu в папку {Корень сайта}/wp-content/plugins/woocommerce/classes/gateways/
 2. Открыть в редакторе файл {Корень сайта}/wp-content/plugins/woocommerce/woocommerce.php
-	a. Найти кусок кода с подобным содержанием :
-		`function core_gateways( $methods ) { $methods[] = 'WC_Gateway_BACS'; .... `
-	
-	b. Добавить строку  `$methods[] = 'WC_Gateway_PayU';`
+a. Найти кусок кода с подобным содержанием :
+```
+`function core_gateways( $methods ) { $methods[] = 'WC_Gateway_BACS'; .... `
+```
+b. Добавить строку
+```
+`$methods[] = 'WC_Gateway_PayU';`
+```
 3. Зайти в админку сайта
 	a. Выбрать меню "woocommerce" -> "настройки"
 	b. Выбрать вкладку "платежные системы"
