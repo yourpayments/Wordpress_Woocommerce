@@ -243,6 +243,10 @@ class WC_Gateway_PayU extends WC_Payment_Gateway {
 			)
 		);
 
+		$shipping_total = 0;
+		foreach ( $order->get_shipping_methods() as $shipping ) {
+			$shipping_total += $shipping['cost'];
+		}
 
 		$billing = array(
 					"BILL_FNAME" => $order->billing_first_name,
@@ -255,7 +259,7 @@ class WC_Gateway_PayU extends WC_Payment_Gateway {
 					"BILL_COUNTRYCODE" => $order->billing_country,
 					"BILL_ZIPCODE" => $order->billing_postcode,
 					"LANGUAGE" => $this->get_option( "language" ),
-					"ORDER_SHIPPING" => number_format( $order->get_shipping() + $order->get_shipping_tax() , 2, '.', '' ),#$order->get_shipping(),
+					"ORDER_SHIPPING" => number_format( $shipping_total + $order->get_shipping_tax() , 2, '.', '' ),#$order->get_shipping(),
 					"PRICES_CURRENCY" => get_woocommerce_currency(),
 					"ORDER_REF" => $order->id
 	);
@@ -336,8 +340,7 @@ class WC_Gateway_PayU extends WC_Payment_Gateway {
 
 		$pay = PayU::getInst()->setOptions( $option )->setData( $payu_args['Payu_data'] )->LU();
 
-
-		$woocommerce->add_inline_js( '
+		wc_enqueue_js( '
 			
 			jQuery("#submit_payu_payment_form").click( function(){
 				jQuery("body").block({
@@ -418,9 +421,8 @@ class WC_Gateway_PayU extends WC_Payment_Gateway {
 
 		if ($_POST['ORDERSTATUS'] !== "COMPLETE" && ( $debug == 1 &&  $_POST['ORDERSTATUS'] !== "TEST")  ) return false;
 
-		echo $this->payansewer;
-		
-		return true;
+		return $this->payansewer;
+	
     }
 
 
@@ -432,12 +434,18 @@ class WC_Gateway_PayU extends WC_Payment_Gateway {
 	 */
 	function check_ipn_response() {
 		@ob_clean();
-    	if ( ! empty( $_POST ) && $this->check_ipn_request_is_valid() ) {
+    		if ( ! empty( $_POST ) && $responce = $this->check_ipn_request_is_valid() ) {
 
-    		header( 'HTTP/1.1 200 OK' );
+	    		header( 'HTTP/1.1 200 OK' );
+	        	do_action( "valid-payu-standard-ipn-request", $_POST );
 
-        	do_action( "valid-payu-standard-ipn-request", $_POST );
+			if ($responce) {
+				echo $responce;
+				@ob_flush();
+			}
+
 		} else {
+
 			wp_die( "PayU IPN Request Failure" );
 
    		}
