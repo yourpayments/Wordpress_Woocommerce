@@ -140,7 +140,7 @@ class WC_Gateway_PayU extends WC_Payment_Gateway {
 							'title' => __( 'Описание', 'woocommerce' ),
 							'type' => 'textarea',
 							'description' => __( 'Такое описание будет под названием способа оплаты.', 'woocommerce' ),
-							'default' => __( 'Оплата через платежный шлюз PayU<a target="_blank" href="payu.ua">payu.ua</a>', 'woocommerce' )
+							'default' => __( 'Оплата через платежный шлюз PayU<a target="_blank" href="payu.ru">payu.ru</a>', 'woocommerce' )
 						),
 			'Merchant_ops' => array(
 							'title' => __( 'Настройки мерчанта', 'woocommerce' ),
