@@ -300,13 +300,13 @@ class WC_Gateway_PayU extends WC_Payment_Gateway {
 				{
 						$OrderArray['ORDER_PNAME'][] = $item['name']; # Array with data of goods
 						$OrderArray['ORDER_QTY'][] = $item['qty']; # Array with data of counts of each goods 
-						$OrderArray['ORDER_PRICE'][] = $order->get_item_subtotal( $item, false ); #number_format( $order->get_total() - $order->get_shipping() - $order->get_shipping_tax() + $order->get_order_discount(), 2, '.', '' ); # Array with prices of goods
+						$OrderArray['ORDER_PRICE'][] = $order->get_item_total( $item, false ); #number_format( $order->get_total() - $order->get_shipping() - $order->get_shipping_tax() + $order->get_order_discount(), 2, '.', '' ); # Array with prices of goods
 						$OrderArray['ORDER_PCODE'][] = $item['product_id'] ; #"testgoods_".$item['id']; # Array with codes of goods
 						$OrderArray['ORDER_VAT'][] = $this->get_option( "VAT" );# Array with VAT of each goods  => from settings
 				}
 	if($order->get_order_discount()) $OrderArray['DISCOUNT'] = $order->get_order_discount();
 		$payu_args['Payu_data'] = $OrderArray;
-		$payu_args = apply_filters( 'woocommerce_payu_args', $payu_args );
+		// $payu_args = apply_filters( 'woocommerce_payu_args', $payu_args );
 
 		return $payu_args;
 	}
