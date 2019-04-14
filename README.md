@@ -19,16 +19,15 @@
  {Корень сайта}/wordpress/wp-content/plugins/woocommerce/includes/class-wc-payment-gateways.php
  ```
 3. Откройте файл, в котором реализован класс WC_Payment_Gateways.
-4. Добавьте туда систему PayU. Для этого необходимо добавить WC_Gateway_PayU в массив, передаваемый вторым параметром в функции apply_filters. Впишите следующий фрагмент кода:
+4. Добавьте туда систему PayU. Для этого необходимо добавить WC_Gateway_PayU в массив load_gateways. Впишите следующий фрагмент кода:
   ```
-  $load_gateways = apply_filters( 'woocommerce_payment_gateways', array(
-   'WC_Gateway_BACS',
-   'WC_Gateway_Cheque',
-   'WC_Gateway_COD',
-   'WC_Gateway_Mijireh',
-   'WC_Gateway_Paypal',
-   'WC_Gateway_PayU',
-     ) );
+ $load_gateways = array(
+			'WC_Gateway_BACS',
+			'WC_Gateway_Cheque',
+			'WC_Gateway_COD',
+			'WC_Gateway_Paypal',
+			'WC_Gateway_PayU',
+		);
  ```
 5. Зайдите в административную консоль своего сайта на Wordpress. 
 6. Через главное меню перейдите Woocommerce > Настройки.
