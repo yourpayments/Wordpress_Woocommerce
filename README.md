@@ -1,11 +1,8 @@
-(For PayU Ukraine and Russian ONLY)
 -------
-{Корень сайта}/wp-content/plugins/woocommerce/classes/gateways/
-
-
 #Модуль для CMS Wordpress WooCommerce
 ======
 
+{Корень сайта}/wp-content/plugins/woocommerce/classes/gateways/
 ( Обратите внимание, что модуль уже содержит ссылку для IPN-запроса )
 
 ##Установка
