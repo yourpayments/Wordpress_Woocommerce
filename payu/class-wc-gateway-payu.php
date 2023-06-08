@@ -105,7 +105,7 @@ class WC_Gateway_PayU extends WC_Payment_Gateway {
     function init_form_fields() {
 	$country = array("RU" => "Russia", "UA" => "Ukraine");
   	$curType = array('UAH' => 'Гривны', 'RUB' => 'Рубли');
-  	$country = array('https://secure.payu.ua/order/lu.php' => 'Украина', 'https://secure.payu.ru/order/lu.php' => 'Россия');
+  	$country = array('https://secure.ypmn.ru/order/lu.php' => 'Россия');
   	$languages = array('RU' => 'Русский', 'EN' => 'Английский');
 
     $this->form_fields = array(
@@ -126,21 +126,21 @@ class WC_Gateway_PayU extends WC_Payment_Gateway {
 			'enabled' => array(
 							'title' => __( 'Включен/Выключен', 'woocommerce' ),
 							'type' => 'checkbox',
-							'label' => __( 'Включить работу палатежного шлюза PayU', 'woocommerce' ),
+							'label' => __( 'Включить работу палатежного шлюза Твои Платежи', 'woocommerce' ),
 							'default' => 'yes'
 						),
 			'title' => array(
 							'title' => __( 'Название', 'woocommerce' ),
 							'type' => 'text',
 							'description' => __( 'Такоей название будет отображаться в корзине.', 'woocommerce' ),
-							'default' => __( 'PayU', 'woocommerce' ),
+							'default' => __( 'Твои Платежи', 'woocommerce' ),
 							'desc_tip'      => true,
 						),
 			'description' => array(
 							'title' => __( 'Описание', 'woocommerce' ),
 							'type' => 'textarea',
 							'description' => __( 'Такое описание будет под названием способа оплаты.', 'woocommerce' ),
-							'default' => __( 'Оплата через платежный шлюз PayU<a target="_blank" href="payu.ru">payu.ru</a>', 'woocommerce' )
+							'default' => __( 'Оплата через платежный шлюз Твои Платежи<a target="_blank" href="ypmn.ru">ypmn.ru</a>', 'woocommerce' )
 						),
 			'Merchant_ops' => array(
 							'title' => __( 'Настройки мерчанта', 'woocommerce' ),
@@ -151,22 +151,22 @@ class WC_Gateway_PayU extends WC_Payment_Gateway {
 			'merchant' => array(
 							'title' => __( 'Идентификатор мерчанта', 'woocommerce' ),
 							'type' 			=> 'text',
-							'description' => __( 'Идентификатор мерчанта в системе PayU.', 'woocommerce' ),
+							'description' => __( 'Идентификатор мерчанта в системе Твои Платежи.', 'woocommerce' ),
 							'default' => '',
 							'desc_tip'      => true,
 						),
 			'secret_key' => array(
 							'title' => __( 'Секретный ключ', 'woocommerce' ),
 							'type' 			=> 'text',
-							'description' => __( 'Секретный ключ системы PayU.', 'woocommerce' ),
+							'description' => __( 'Секретный ключ системы Твои Платежи.', 'woocommerce' ),
 							'default' => '',
 							'desc_tip'      => true,
 						),
 			'country' => array(
 							'title' => __( 'Страна мерчанта', 'woocommerce' ),
 							'type' => 'select',
-							'description' => __( 'Выберите страну, в которой зарегистрирован мерчант PayU.', 'woocommerce' ),
-							'default' => 'https://secure.payu.ru/order/lu.php',
+							'description' => __( 'Выберите страну, в которой зарегистрирован мерчант Твои Платежи.', 'woocommerce' ),
+							'default' => 'https://secure.ypmn.ru/order/lu.php',
 							'options' => $country,
 							'desc_tip'      => true,
 						),
@@ -352,7 +352,7 @@ class WC_Gateway_PayU extends WC_Payment_Gateway {
 			
 			jQuery("#submit_payu_payment_form").click( function(){
 				jQuery("body").block({
-					message: "' . esc_js( __( 'Спасибо за ваш заказ. Сейчас вы будете перенаправлены в систему PayU для оплаты.', 'woocommerce' ) ) . '",
+					message: "' . esc_js( __( 'Спасибо за ваш заказ. Сейчас вы будете перенаправлены в систему Твои Платежи для оплаты.', 'woocommerce' ) ) . '",
 					baseZ: 99999,
 					overlayCSS:
 					{
@@ -410,7 +410,7 @@ class WC_Gateway_PayU extends WC_Payment_Gateway {
 		error_reporting(E_ERROR);
 		ini_set('display_errors', 1);
 
-		echo '<p>'.__( 'Спасибо за ваш заказ. Нажмите кнопку, для перехода к оплате через PayU.', 'woocommerce' ).'</p>';
+		echo '<p>'.__( 'Спасибо за ваш заказ. Нажмите кнопку, для перехода к оплате через Твои Платежи.', 'woocommerce' ).'</p>';
 		echo $this->generate_payu_form( $order );
 
 	}
@@ -485,7 +485,7 @@ class WC_Gateway_PayU extends WC_Payment_Gateway {
 					// Validate Amount
 				    if ( $order->get_total() != $posted['IPN_TOTALGENERAL'] ) {
 				    	// Put this order on-hold for manual checking
-				    	$order->update_status( 'on-hold', sprintf( __( 'Ошибка валидации: сумма оплаты не совпадает (сумма PayU : %s).', 'woocommerce' ), $posted['IPN_TOTALGENERAL'] ) );
+				    	$order->update_status( 'on-hold', sprintf( __( 'Ошибка валидации: сумма оплаты не совпадает (сумма Твои Платежи : %s).', 'woocommerce' ), $posted['IPN_TOTALGENERAL'] ) );
 
 				    	exit;
 				    }
