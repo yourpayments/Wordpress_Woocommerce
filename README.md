@@ -1,6 +1,10 @@
 -------
-#Модуль для CMS Wordpress WooCommerce
-======
+# «Твои платежи», модуль для CMS Wordpress WooCommerce
+
+![](https://repository-images.githubusercontent.com/638835276/ff494b04-d65b-4843-8759-e85c689a7e80)
+
+[НКО «Твои Платежи»](https://YPMN.ru/ "Платёжная система для сайтов, платформ и приложений") - платёжная система для сайтов, платформ, игр и приложений.
+
 
 {Корень сайта}/wp-content/plugins/woocommerce/classes/gateways/
 ( Обратите внимание, что модуль уже содержит ссылку для IPN-запроса )
